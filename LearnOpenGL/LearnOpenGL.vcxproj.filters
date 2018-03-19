@@ -24,6 +24,12 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertexShader.vert">
@@ -32,5 +38,13 @@
     <None Include="fragmentShader.frag">
       <Filter>shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
