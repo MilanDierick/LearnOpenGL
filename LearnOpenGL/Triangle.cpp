@@ -1,23 +1,14 @@
 ﻿#include "Triangle.h"
 
-float* Triangle::getVertices() const
+float* Triangle::getVertices()
 {
 	return vertices;
 }
 
-void Triangle::setVertices(float* const vertices)
+void Triangle::setVertices(const float* vertices)
 {
-	this->vertices = vertices;
-}
-
-GLuint Triangle::getVao() const
-{
-	return vao;
-}
-
-void Triangle::setVao(const GLuint vao)
-{
-	this->vao = vao;
+	for (auto x = 0; x < 12; ++x)
+		this->vertices[x] = vertices[x];
 }
 
 GLuint Triangle::getVbo() const
@@ -30,14 +21,15 @@ void Triangle::setVbo(const GLuint vbo)
 	this->vbo = vbo;
 }
 
-Triangle::Triangle(float* vertices, const GLuint vao, const GLuint vbo)
+Triangle::Triangle(const float* vertices, const GLuint &vao)
 {
-	this->vertices = vertices;
-	this->vao = vao;
-	this->vbo = vbo;
+	for (auto x = 0; x < 12; ++x)
+	{
+		this->vertices[x] = vertices[x];
+	}
 
 	glGenBuffers(1, &this->vbo);
-	glBindVertexArray(this->vao);
+	glBindVertexArray(vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(this->vertices), this->vertices, GL_STATIC_DRAW);
@@ -47,4 +39,9 @@ Triangle::Triangle(float* vertices, const GLuint vao, const GLuint vbo)
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+Triangle::~Triangle()
+{
+	glDeleteBuffers(1, &vbo);
 }
