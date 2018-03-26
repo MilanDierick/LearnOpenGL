@@ -23,11 +23,11 @@ public:
 	
 
 private:
-	int width_{};
-	int height_{};
-	std::string title_;
-	GLFWmonitor *monitor_;
-	GLFWwindow *window_;
-	bool isCreated_;
+	int width;
+	int height;
+	std::string title;
+	GLFWmonitor *monitor;
+	GLFWwindow *window;
+	bool isCreated;
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 };

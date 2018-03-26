@@ -4,76 +4,76 @@
 
 int Window::getWidth() const
 {
-	return width_;
+	return width;
 }
 
 void Window::setWidth(const int width)
 {
-	width_ = width;
+	this->width = width;
 }
 
 int Window::getHeight() const
 {
-	return height_;
+	return height;
 }
 
 void Window::setHeight(const int height)
 {
-	height_ = height;
+	this->height = height;
 }
 
 std::string Window::getTitle() const
 {
-	return title_;
+	return title;
 }
 
 void Window::setTitle(const std::string& title)
 {
-	title_ = title;
+	this->title = title;
 }
 
 GLFWmonitor* Window::getMonitor() const
 {
-	return monitor_;
+	return monitor;
 }
 
 void Window::setMonitor(GLFWmonitor* const monitor)
 {
-	monitor_ = monitor;
+	this->monitor = monitor;
 }
 
 GLFWwindow* Window::getWindow() const
 {
-	return window_;
+	return window;
 }
 
 void Window::setWindow(GLFWwindow* const window)
 {
-	window_ = window;
+	this->window = window;
 }
 
 bool Window::getIsCreated() const
 {
-	return isCreated_;
+	return isCreated;
 }
 
 void Window::setIsCreated(const bool isCreated)
 {
-	isCreated_ = isCreated;
+	this->isCreated = isCreated;
 }
 
-void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height)
+void Window::framebufferSizeCallback(GLFWwindow* window, const int width, const int height)
 {
 	std::cout << "Viewport changed: (" << width << "," << height << ")." << std::endl;
 	glViewport(0, 0, width, height);
 }
 
 Window::Window(const int width, int const height, std::string title, GLFWmonitor* monitor,
-               GLFWwindow* const window): width_(width),
-                                                                height_(height),
-                                                                title_(std::move(title)),
-                                                                monitor_(monitor),
-                                                                window_(window)
+               GLFWwindow* const window): width(width),
+                                                                height(height),
+                                                                title(std::move(title)),
+                                                                monitor(monitor),
+                                                                window(window)
 {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -86,7 +86,7 @@ Window::Window(const int width, int const height, std::string title, GLFWmonitor
 	if (this->getWindow() == nullptr)
 	{
 		std::cout << "Failed to create window" << std::endl;
-		isCreated_ = false;
+		isCreated = false;
 		glfwTerminate();
 		throw;
 	}
@@ -95,5 +95,5 @@ Window::Window(const int width, int const height, std::string title, GLFWmonitor
 	glViewport(0, 0, this->getWidth(), this->getHeight());
 	glfwSetFramebufferSizeCallback(this->getWindow(), framebufferSizeCallback);
 
-	isCreated_ = true;
+	isCreated = true;
 }
