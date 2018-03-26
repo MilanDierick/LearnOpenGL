@@ -166,6 +166,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="LearnOpenGL.cpp" />
     <ClCompile Include="shaderSource.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderSource.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
