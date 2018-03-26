@@ -2,22 +2,17 @@
 
 #include <glad/glad.h>
 
-// TODO: Split up creation and configuration of a triangle.
-class Triangle
+class Triangle  // NOLINT
 {
 public:
-	float* getVertices();
-	void setVertices(const float* vertices);
-	GLuint getVbo() const;
-	void setVbo(const GLuint vbo);
-	Triangle(const float* vertices, const GLuint &vao);
+	float vertices[9];
+	GLuint vao;
+	bool isInitialized;
+
+	void Init();
+	void Draw() const;
+	explicit Triangle(const float* vertices, bool initialize = true);
 	~Triangle();
-	Triangle(const Triangle& other) = delete;
-	Triangle(Triangle&& other) noexcept = delete;
-	Triangle& operator=(const Triangle& other) = delete;
-	Triangle& operator=(Triangle&& other) noexcept = delete;
 
 private:
-	float vertices[12];
-	GLuint vbo{};
 };

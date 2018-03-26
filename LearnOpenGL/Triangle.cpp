@@ -1,47 +1,51 @@
 ﻿#include "Triangle.h"
+#include <iostream>
 
-float* Triangle::getVertices()
+void Triangle::Init()
 {
-	return vertices;
+	if (!isInitialized)
+	{
+		glGenBuffers(1, &this->vao);
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+		glBindBuffer(GL_ARRAY_BUFFER, this->vao);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(this->vertices), this->vertices, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+		isInitialized = true;
+	}
 }
 
-void Triangle::setVertices(const float* vertices)
+void Triangle::Draw() const
 {
-	for (auto x = 0; x < 12; ++x)
-		this->vertices[x] = vertices[x];
+	if (isInitialized)
+	{
+		glBindVertexArray(this->vao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);
+	}
+	else
+	{
+		std::cout << "ERROR::TRIANGLE::DRAW::UNINITIALIZED_OBJECT_DRAW" << std::endl;
+	}
 }
 
-GLuint Triangle::getVbo() const
+Triangle::Triangle(const float* vertices, const bool initialize): vao(0), isInitialized(false)  // NOLINT
 {
-	return vbo;
-}
-
-void Triangle::setVbo(const GLuint vbo)
-{
-	this->vbo = vbo;
-}
-
-Triangle::Triangle(const float* vertices, const GLuint &vao)
-{
-	for (auto x = 0; x < 12; ++x)
+	for (auto x = 0; x < 9; ++x)
 	{
 		this->vertices[x] = vertices[x];
 	}
 
-	glGenBuffers(1, &this->vbo);
-	glBindVertexArray(vao);
-
-	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(this->vertices), this->vertices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	if (initialize)
+		Init();
+	else
+		std::cout << "WARNING::TRIANGLE::INIT::UNINITIALIZED_OBJECT" << std::endl;
 }
 
 Triangle::~Triangle()
 {
-	glDeleteBuffers(1, &vbo);
+	glDeleteBuffers(1, &vao);
 }
