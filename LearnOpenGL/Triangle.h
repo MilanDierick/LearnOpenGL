@@ -13,6 +13,4 @@ public:
 	void Draw() const;
 	explicit Triangle(const float* vertices, bool initialize = true);
 	~Triangle();
-
-private:
 };
