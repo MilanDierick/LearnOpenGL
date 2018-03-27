@@ -11,9 +11,14 @@ ShaderSources::ShaderSources()
 
 	fragmentShaderSource = "#version 330 core\n"
 		"out vec4 FragColor;\n"
-		"uniform vec4 ourColor;\n"
+		"uniform vec2 u_resolution;\n"
+		"uniform float u_time;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = ourColor;\n"
+		"	vec2 st = gl_FragCoord.xy / u_resolution.xy;\n"	
+		"	st.x *= u_resolution.x / u_resolution.y;\n"
+		"	vec3 color = vec3(.0);\n"
+		"	color = vec3(st.x,st.y,abs(sin(u_time)));\n"
+		"   FragColor = vec4(color,1.0);\n"
 		"}\n\0";
 }
