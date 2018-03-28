@@ -20,13 +20,12 @@ void Triangle::Init()
 		isInitialized = true;
 	}
 }
-
 void Triangle::Draw() const
 {
 	if (isInitialized)
 	{
 		glBindVertexArray(this->vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 	}
 	else
@@ -37,7 +36,7 @@ void Triangle::Draw() const
 
 Triangle::Triangle(const float* vertices, const bool initialize): vao(0), isInitialized(false)  // NOLINT
 {
-	for (auto x = 0; x < 9; ++x)
+	for (auto x = 0; x < 18; ++x)
 	{
 		this->vertices[x] = vertices[x];
 	}
