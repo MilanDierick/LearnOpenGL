@@ -4,8 +4,8 @@
 
 class Window
 {
+	// TODO: Get rid of all the getters and setter, they are no longer needed. 
 public:
-
 	int getWidth() const;
 	void setWidth(const int width);
 	int getHeight() const;
@@ -23,11 +23,11 @@ public:
 	
 
 private:
-	int width;
-	int height;
-	std::string title;
-	GLFWmonitor *monitor;
-	GLFWwindow *window;
-	bool isCreated;
-	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+	int width_;
+	int height_;
+	std::string title_;
+	GLFWmonitor *monitor_;
+	GLFWwindow *window_;
+	bool isCreated_;
+	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 };

@@ -11,7 +11,7 @@ public:
 	bool isInitialized;
 
 	void Init();
-	void Draw() const;
+	void Draw() const; // TODO: when moving the shaders to this class, make sure to pass all the required data for the uniforms to be updated properly.
 	explicit Triangle(const float* vertices, bool initialize = true);
 	~Triangle();
 };

@@ -1,79 +1,80 @@
 ﻿#include "Window.h"
 #include <utility>
 #include <iostream>
+#include <glad/glad.h>
 
 int Window::getWidth() const
 {
-	return width;
+	return width_;
 }
 
 void Window::setWidth(const int width)
 {
-	this->width = width;
+	this->width_ = width;
 }
 
 int Window::getHeight() const
 {
-	return height;
+	return height_;
 }
 
 void Window::setHeight(const int height)
 {
-	this->height = height;
+	this->height_ = height;
 }
 
 std::string Window::getTitle() const
 {
-	return title;
+	return title_;
 }
 
 void Window::setTitle(const std::string& title)
 {
-	this->title = title;
+	this->title_ = title;
 }
 
 GLFWmonitor* Window::getMonitor() const
 {
-	return monitor;
+	return monitor_;
 }
 
 void Window::setMonitor(GLFWmonitor* const monitor)
 {
-	this->monitor = monitor;
+	this->monitor_ = monitor;
 }
 
 GLFWwindow* Window::getWindow() const
 {
-	return window;
+	return window_;
 }
 
 void Window::setWindow(GLFWwindow* const window)
 {
-	this->window = window;
+	this->window_ = window;
 }
 
 bool Window::getIsCreated() const
 {
-	return isCreated;
+	return isCreated_;
 }
 
 void Window::setIsCreated(const bool isCreated)
 {
-	this->isCreated = isCreated;
+	this->isCreated_ = isCreated;
 }
 
-void Window::framebufferSizeCallback(GLFWwindow* window, const int width, const int height)
+void Window::FramebufferSizeCallback(GLFWwindow* window, const int width, const int height)
 {
 	std::cout << "Viewport changed: (" << width << "," << height << ")." << std::endl;
 	glViewport(0, 0, width, height);
 }
 
 Window::Window(const int width, int const height, std::string title, GLFWmonitor* monitor,
-               GLFWwindow* const window): width(width),
-                                                                height(height),
-                                                                title(std::move(title)),
-                                                                monitor(monitor),
-                                                                window(window)
+               GLFWwindow* const window): width_(width),
+                                                                height_(height),
+                                                                title_(std::move(title)),
+                                                                monitor_(monitor),
+                                                                window_(window)
 {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -86,14 +87,14 @@ Window::Window(const int width, int const height, std::string title, GLFWmonitor
 	if (this->getWindow() == nullptr)
 	{
 		std::cout << "Failed to create window" << std::endl;
-		isCreated = false;
+		isCreated_ = false;
 		glfwTerminate();
 		throw;
 	}
 
 	glfwMakeContextCurrent(this->getWindow());
 	glViewport(0, 0, this->getWidth(), this->getHeight());
-	glfwSetFramebufferSizeCallback(this->getWindow(), framebufferSizeCallback);
+	glfwSetFramebufferSizeCallback(this->getWindow(), FramebufferSizeCallback);
 
-	isCreated = true;
+	isCreated_ = true;
 }
