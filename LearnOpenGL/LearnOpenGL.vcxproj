@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="LearnOpenGL.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="shaderSource.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -174,6 +175,7 @@
     <None Include="vertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="shaderSource.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Window.h" />
