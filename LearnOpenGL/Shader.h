@@ -51,7 +51,15 @@ public:
 	* \param name Name of the uniform.
 	* \param value Value of the uniform.
 	*/
-	void SetFloat(const std::string &name, int value) const;
+	void SetFloat(const std::string &name, float value) const;
+
+	/**
+	 * \brief Utility uniform function.
+	 * \param name Name of the uniform.
+	 * \param value1 Value of the first vector component.
+	 * \param value2 Value of the second vector component.
+	 */
+	void SetVec2(const std::string &name, float value1, float value2) const;
 };
 
 #endif
