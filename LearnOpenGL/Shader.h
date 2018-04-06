@@ -30,28 +30,28 @@ public:
 	/**
 	 * \brief Use/activate the shader.
 	 */
-	void Use();
+	void Use() const;
 
 	/**
 	 * \brief Utility uniform funtion.
 	 * \param name Name of the uniform.
 	 * \param value Value of the uniform.
 	 */
-	void SetBool(const std::string &name, bool value);
+	void SetBool(const std::string &name, bool value) const;
 
 	/**
 	* \brief Utility uniform funtion.
 	* \param name Name of the uniform.
 	* \param value Value of the uniform.
 	*/
-	void SetInt(const std::string &name, int value);
+	void SetInt(const std::string &name, int value) const;
 
 	/**
 	* \brief Utility uniform funtion.
 	* \param name Name of the uniform.
 	* \param value Value of the uniform.
 	*/
-	void SetFloat(const std::string &name, int value);
+	void SetFloat(const std::string &name, int value) const;
 };
 
 #endif

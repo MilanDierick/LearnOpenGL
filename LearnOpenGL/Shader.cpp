@@ -34,13 +34,13 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 		vertexCode	 = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
 	}
-	catch (std::ifstream::failure e)
+	catch (std::ifstream::failure &e)
 	{
 		std::cout << "ERROR::SHADER::FILE_NOTSUCCESFULLY_READ" << std::endl;
 	}
 
-	const char* vShaderCode = vertexCode.c_str();
-	const char* fShaderCode = fragmentCode.c_str();
+	const auto vShaderCode = vertexCode.c_str();
+	const auto fShaderCode = fragmentCode.c_str();
 
 	// 2. Compile shaders
 	// ---------------------------------------------------------------------
@@ -62,8 +62,8 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	}
 
 	// Fragment shader.
-	auto fragment = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, nullptr);
+	const auto fragment = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(fragment, 1, &fShaderCode, nullptr);
 	glCompileShader(fragment);
 
 	// Print compile errors if any.
@@ -73,4 +73,28 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 		glGetShaderInfoLog(vertex, INFO_LOG_BUFFER, nullptr, infoLog);
 		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED" << std::endl << infoLog << std::endl;
 	}
+
+	// Delete the shaders as they're linked into our program now are no longer required
+	glDeleteShader(vertex);
+	glDeleteShader(fragment);
+}
+
+void Shader::Use() const
+{
+	glUseProgram(id);
+}
+
+void Shader::SetBool(const std::string& name, const bool value) const
+{
+	glUniform1i(glGetUniformLocation(id, name.c_str()), static_cast<int>(value));
+}
+
+void Shader::SetInt(const std::string& name, const int value) const
+{
+	glUniform1i(glGetUniformLocation(id, name.c_str()), value);
+}
+
+void Shader::SetFloat(const std::string& name, const int value) const
+{
+	glUniform1f(glGetUniformLocation(id, name.c_str()), static_cast<float>(value));
 }
