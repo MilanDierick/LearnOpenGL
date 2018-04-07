@@ -4,12 +4,7 @@
 
 #define INFO_LOG_BUFFER 512
 
-#include <glad/glad.h> // Include glad to get all the required OpenGL header
-
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+#include "CommonHeader.h"
 
 class Shader
 {

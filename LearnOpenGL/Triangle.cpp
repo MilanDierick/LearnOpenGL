@@ -1,6 +1,6 @@
 ﻿#include "Triangle.h"
 #include <iostream>
-#include <GL/gl.h>
+#include <gl/GL.h>
 
 void Triangle::Init()
 {

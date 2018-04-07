@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <glad/glad.h>
+#include "CommonHeader.h"
 
 // TODO: create seperated class to draw a quad on the screen instead of combining 2 triangles.
 class Triangle  // NOLINT

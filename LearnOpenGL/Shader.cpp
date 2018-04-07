@@ -1,5 +1,4 @@
 ﻿#include "Shader.h"
-#include <iostream>
 
 Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 {
@@ -18,8 +17,8 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	try
 	{
 		// Open files
-		vShaderFile.open(vertexPath);
-		fShaderFile.open(fragmentPath);
+		vShaderFile.open(vertexPath, std::ifstream::in);
+		fShaderFile.open(fragmentPath, std::ifstream::in);
 		std::stringstream vShaderStream;
 		std::stringstream fShaderStream;
 
@@ -35,9 +34,11 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 		vertexCode	 = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
 	}
+		// ReSharper disable once CppDeclaratorNeverUsed
 	catch (std::ifstream::failure &e)
 	{
 		std::cout << "ERROR::SHADER::FILE_NOTSUCCESFULLY_READ" << std::endl;
+		throw;
 	}
 
 	const auto vShaderCode = vertexCode.c_str();
@@ -63,7 +64,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	}
 
 	// Fragment shader
-	const auto fragment = glCreateShader(GL_VERTEX_SHADER);
+	const auto fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, nullptr);
 	glCompileShader(fragment);
 
